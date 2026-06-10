@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>competitive-digest</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #fdfdfd;
+        --panel: #ffffff;
+        --text: #17191c;
+        --muted: #5d6675;
+        --primary: #b971e0;
+        --accent: #ffaf0a;
+        --border: #cad3e0;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top left, #ead5f6 0, transparent 36%), var(--bg);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 48px 20px 64px;
+      }
+      .hero {
+        background: linear-gradient(135deg, rgba(185,113,224,.12), rgba(255,175,10,.12));
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 18px 50px rgba(23,25,28,.08);
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-family: Poppins, Roboto, sans-serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 1.05;
+      }
+      p { line-height: 1.6; color: var(--muted); }
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        margin-top: 24px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 18px;
+      }
+      .card h2 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+      }
+      code, a {
+        color: var(--primary);
+      }
+      ul { margin: 10px 0 0 18px; color: var(--muted); }
+      .badge {
+        display: inline-block;
+        margin-bottom: 14px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(185,113,224,.12);
+        color: #581a7a;
+        font-size: .85rem;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="hero">
+        <div class="badge">competitive-digest MVP</div>
+        <h1>Inteligência competitiva semanal</h1>
+        <p>
+          Este repositório já contém o pipeline do digest, os YAMLs de concorrentes e produtos,
+          e a geração de relatório em Markdown/HTML.
+        </p>
+        <div class="grid">
+          <div class="card">
+            <h2>Rodar agora</h2>
+            <p><code>pnpm digest:run</code></p>
+          </div>
+          <div class="card">
+            <h2>Entrada</h2>
+            <p><code>config/competitors.yaml</code></p>
+            <p><code>config/products.yaml</code></p>
+          </div>
+          <div class="card">
+            <h2>Saída</h2>
+            <p><code>exports/weekly/YYYY-MM-DD.md</code></p>
+            <p><code>exports/weekly/YYYY-MM-DD.html</code></p>
+          </div>
+          <div class="card">
+            <h2>Próximo passo</h2>
+            <p>Instalar dependências e executar o job para gerar o primeiro relatório.</p>
+          </div>
+        </div>
+        <ul>
+          <li>Se o navegador mostrar só o diretório, é porque faltava essa página inicial.</li>
+          <li>O serviço local está em <code>http://127.0.0.1:3000</code>.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
