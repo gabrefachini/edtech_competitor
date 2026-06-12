@@ -1,4 +1,4 @@
-import { hashContent } from "./detectChanges.js";
+import { hashContent } from "./detectChanges";
 
 export type NewsItem = {
   source: string;

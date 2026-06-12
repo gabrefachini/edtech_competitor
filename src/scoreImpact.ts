@@ -1,9 +1,10 @@
-import type { Product } from "./loadConfig.js";
+import type { Product } from "./loadConfig";
 
 export type ScoredImpact = {
   product: string;
   score: number;
   reason: string;
+  why: string;
 };
 
 function countMatches(text: string, keywords: string[]) {
@@ -20,7 +21,7 @@ export function scoreImpact(eventText: string, products: Product[], context?: { 
     const reason = score > 0
       ? `Há sinais que se relacionam com ${product.name} por correspondência de termos e contexto competitivo.`
       : `Sem sinal forte, mas o evento ajuda a monitorar ${product.name} no radar competitivo.`;
-    return { product: product.name, score, reason };
+    return { product: product.name, score, reason, why: reason };
   });
   return scored.sort((a, b) => b.score - a.score).slice(0, 3);
 }

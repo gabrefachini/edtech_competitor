@@ -2,54 +2,23 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
 import yaml from "js-yaml";
+import {
+  createDeterministicId,
+  normalizeCompetitorConfig,
+  normalizeCompetitorConfigs,
+  normalizeMarket,
+  slugify,
+  type NormalizedCompetitorConfig,
+  type RawCompetitorConfig
+} from "./competitorConfig";
+import type { CompetitorItem } from "./types";
+import { resolveProjectPath } from "./projectPaths";
 
-export type CompetitorStatus = "active" | "paused";
-export type CompetitorScope = "competes_market" | "benchmark_global";
-export type CompetitorRegion = "BR" | "LATAM" | "GLOBAL";
-export type CompetitorMarket = "public" | "private";
-
-export type CompetitorRecord = {
-  id: string;
-  name: string;
-  website: string;
-  scope: CompetitorScope;
-  regions: CompetitorRegion[];
-  markets: CompetitorMarket[];
-  tags: string[];
-  status: CompetitorStatus;
-  last_run: string | null;
-  events_7d: number;
-  impacted_products: string[];
-};
-
-type RawCompetitor = Partial<CompetitorRecord> & {
-  socials?: Record<string, unknown>;
-  markets?: string[] | string;
-  regions?: string[] | string;
-  tags?: string[] | string;
-  impacted_products?: string[] | string;
-  products_impacted?: string[] | string;
-  status?: string;
-  scope?: string;
-  id?: string;
-  website?: string;
-  name?: string;
-  last_run?: string | null;
-  events_7d?: number | string;
-};
-
-type CompetitorFile = {
-  version?: string;
-  notes?: string[];
-  competitors: RawCompetitor[];
-};
-
-const ROOT = process.cwd();
 export const COMPETITOR_YAML_PATH = fsPath("config/competitors.yaml");
 const EVENTS_PATH = fsPath("data/events.jsonl");
 
 function fsPath(...segments: string[]) {
-  return path.join(ROOT, ...segments);
+  return resolveProjectPath(...segments);
 }
 
 function splitList(input?: string[] | string): string[] {
@@ -65,84 +34,42 @@ function dedupe<T>(items: T[]) {
   return [...new Set(items)];
 }
 
-export function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-export function normalizeMarket(value: string): CompetitorMarket | null {
-  const normalized = value.trim().toLowerCase();
-  if (!normalized) return null;
-  if (["publix", "public", "público", "publico"].includes(normalized)) return "public";
-  if (["private", "privado"].includes(normalized)) return "private";
-  return null;
-}
-
-export function normalizeRegion(value: string): CompetitorRegion | null {
-  const normalized = value.trim().toUpperCase();
-  if (normalized === "BR" || normalized === "LATAM" || normalized === "GLOBAL") return normalized;
-  return null;
-}
-
-export function normalizeCompetitor(raw: RawCompetitor, fallbackIndex = 0): CompetitorRecord {
-  const name = String(raw.name ?? "").trim();
-  const website = String(raw.website ?? "").trim();
-  const id = String(raw.id ?? slugify(name || website || `competitor-${fallbackIndex}`)).trim();
-  const scope = raw.scope === "benchmark_global" ? "benchmark_global" : "competes_market";
-  const regions = dedupe(
-    splitList(raw.regions)
-      .map(normalizeRegion)
-      .filter((item): item is CompetitorRegion => Boolean(item))
-  );
-  const markets = dedupe(
-    splitList(raw.markets)
-      .map(normalizeMarket)
-      .filter((item): item is CompetitorMarket => Boolean(item))
-  );
-  const tags = dedupe(splitList(raw.tags).map((item) => item.trim()).filter(Boolean));
-  const impactedProducts = dedupe(splitList(raw.impacted_products ?? raw.products_impacted).map((item) => item.trim()).filter(Boolean));
-  const status: CompetitorStatus = raw.status === "paused" ? "paused" : "active";
-  const last_run = raw.last_run ? new Date(raw.last_run).toISOString() : null;
-  const events_7d = Number(raw.events_7d ?? 0) || 0;
-
-  return {
-    id,
-    name,
-    website,
-    scope,
-    regions: regions.length ? regions : ["BR"],
-    markets: markets.length ? markets : ["private"],
-    tags,
-    status,
-    last_run,
-    events_7d,
-    impacted_products: impactedProducts
-  };
-}
-
-export function normalizeCompetitors(raw: RawCompetitor[]) {
-  return raw.map((item, index) => normalizeCompetitor(item, index));
-}
-
 async function readCompetitorFile(filePath = COMPETITOR_YAML_PATH) {
   const raw = await fs.readFile(filePath, "utf8");
-  return yaml.load(raw) as CompetitorFile;
+  return yaml.load(raw) as { version?: string; notes?: string[]; competitors: RawCompetitorConfig[] };
 }
 
-async function writeCompetitorFile(file: CompetitorFile, filePath = COMPETITOR_YAML_PATH) {
+async function writeCompetitorFile(file: { version?: string; notes?: string[]; competitors: RawCompetitorConfig[] }, filePath = COMPETITOR_YAML_PATH) {
   const tempPath = `${filePath}.tmp`;
   const yamlString = yaml.dump(file, { lineWidth: 120, noRefs: true, sortKeys: false });
   await fs.writeFile(tempPath, yamlString, "utf8");
   await fs.rename(tempPath, filePath);
 }
 
+export function normalizeCompetitor(raw: RawCompetitorConfig, fallbackIndex = 0): NormalizedCompetitorConfig {
+  return normalizeCompetitorConfig(raw, fallbackIndex);
+}
+
+export function normalizeCompetitors(raw: RawCompetitorConfig[]) {
+  return normalizeCompetitorConfigs(raw);
+}
+
 export async function loadCompetitors(filePath = COMPETITOR_YAML_PATH) {
   const file = await readCompetitorFile(filePath);
-  const competitors = normalizeCompetitors(file.competitors ?? []);
+  const competitors = normalizeCompetitors(file.competitors ?? []).map((competitor) => ({
+    id: competitor.id,
+    name: competitor.name,
+    website: competitor.website,
+    scope: competitor.scope,
+    regions: competitor.regions,
+    markets: competitor.markets,
+    tags: competitor.tags,
+    status: competitor.status,
+    last_run: null,
+    events_7d: 0,
+    impacted_products: competitor.products_impacted,
+    sources: competitor.sources
+  }));
   return { file, competitors };
 }
 
@@ -151,7 +78,7 @@ export async function getCompetitorById(id: string, filePath = COMPETITOR_YAML_P
   return competitors.find((item) => item.id === id) ?? null;
 }
 
-export function applyFilters(competitors: CompetitorRecord[], query: URLSearchParams) {
+export function applyFilters(competitors: CompetitorItem[], query: URLSearchParams) {
   const region = query.get("region")?.trim().toUpperCase();
   const market = query.get("market")?.trim().toLowerCase();
   const scope = query.get("scope")?.trim();
@@ -159,7 +86,7 @@ export function applyFilters(competitors: CompetitorRecord[], query: URLSearchPa
   const status = query.get("status")?.trim().toLowerCase();
 
   return competitors.filter((item) => {
-    if (region && !item.regions.includes(region as CompetitorRegion)) return false;
+    if (region && !item.regions.includes(region as any)) return false;
     if (market && !item.markets.includes(normalizeMarket(market) ?? "private")) return false;
     if (scope && item.scope !== scope) return false;
     if (tag && !item.tags.some((entry) => entry.toLowerCase().includes(tag))) return false;
@@ -168,45 +95,130 @@ export function applyFilters(competitors: CompetitorRecord[], query: URLSearchPa
   });
 }
 
-export async function saveCompetitors(competitors: CompetitorRecord[], filePath = COMPETITOR_YAML_PATH) {
+export async function saveCompetitors(competitors: CompetitorItem[], filePath = COMPETITOR_YAML_PATH) {
   const file = await readCompetitorFile(filePath);
-  const normalized = normalizeCompetitors(competitors);
-  const nextFile: CompetitorFile = {
+  const normalized = competitors.map((item, index) => normalizeCompetitor({
+    id: item.id,
+    name: item.name,
+    website: item.website,
+    scope: item.scope,
+    regions: item.regions,
+    markets: item.markets,
+    tags: item.tags,
+    status: item.status,
+    products_impacted: item.impacted_products
+  }, index));
+  const nextFile = {
     ...file,
-    competitors: normalized
+    competitors: normalized.map((item) => ({
+      id: item.id,
+      name: item.name,
+      website: item.website,
+      scope: item.scope,
+      regions: item.regions,
+      markets: item.markets,
+      tags: item.tags,
+      status: item.status,
+      products_impacted: item.products_impacted,
+      sources: item.sources
+    }))
   };
   await writeCompetitorFile(nextFile, filePath);
-  return normalized;
+  return normalized.map((item) => ({
+    id: item.id,
+    name: item.name,
+    website: item.website,
+    scope: item.scope,
+    regions: item.regions,
+    markets: item.markets,
+    tags: item.tags,
+    status: item.status,
+    last_run: null,
+    events_7d: 0,
+    impacted_products: item.products_impacted,
+    sources: item.sources
+  }));
 }
 
-export async function updateCompetitorById(id: string, updater: (competitor: CompetitorRecord) => CompetitorRecord | Promise<CompetitorRecord>, filePath = COMPETITOR_YAML_PATH) {
+export async function updateCompetitorById(
+  id: string,
+  updater: (competitor: CompetitorItem) => CompetitorItem | Promise<CompetitorItem>,
+  filePath = COMPETITOR_YAML_PATH
+) {
   const { competitors, file } = await loadCompetitors(filePath);
   const current = competitors.find((item) => item.id === id);
   if (!current) return null;
-  const updated = await updater(current);
-  const next = competitors.map((item) => (item.id === id ? updated : item));
-  const nextFile: CompetitorFile = { ...file, competitors: next };
+  const currentItem: CompetitorItem = {
+    id: current.id,
+    name: current.name,
+    website: current.website,
+    scope: current.scope,
+    regions: current.regions,
+    markets: current.markets,
+    tags: current.tags,
+    status: current.status,
+    last_run: null,
+    events_7d: 0,
+    impacted_products: current.impacted_products,
+    sources: current.sources
+  };
+  const updated = await updater(currentItem);
+  const next = competitors.map((item) =>
+    item.id === id
+      ? {
+          ...item,
+          name: updated.name,
+          website: updated.website,
+          scope: updated.scope,
+          regions: updated.regions,
+          markets: updated.markets,
+          tags: updated.tags,
+          status: updated.status,
+          products_impacted: updated.impacted_products
+        }
+      : item
+  );
+  const nextFile = {
+    ...file,
+    competitors: next.map((item) => ({
+      id: item.id,
+      name: item.name,
+      website: item.website,
+      scope: item.scope,
+      regions: item.regions,
+      markets: item.markets,
+      tags: item.tags,
+      status: item.status,
+      products_impacted: item.impacted_products,
+      sources: item.sources
+    }))
+  };
   await writeCompetitorFile(nextFile, filePath);
   return updated;
 }
 
 export async function toggleCompetitorStatus(id: string, filePath = COMPETITOR_YAML_PATH) {
-  return updateCompetitorById(id, async (competitor) => ({
-    ...competitor,
-    status: competitor.status === "active" ? "paused" : "active"
-  }), filePath);
+  return updateCompetitorById(
+    id,
+    async (competitor) => ({
+      ...competitor,
+      status: competitor.status === "active" ? "paused" : "active"
+    }),
+    filePath
+  );
 }
 
 export async function runCompetitorNow(id: string, filePath = COMPETITOR_YAML_PATH) {
   const now = new Date().toISOString();
-  return updateCompetitorById(id, async (competitor) => {
-    const nextEvents = competitor.events_7d + 1;
-    return {
+  return updateCompetitorById(
+    id,
+    async (competitor) => ({
       ...competitor,
       last_run: now,
-      events_7d: nextEvents
-    };
-  }, filePath);
+      events_7d: competitor.events_7d + 1
+    }),
+    filePath
+  );
 }
 
 export function buildCompetitorRouteId(id: string) {
@@ -214,7 +226,7 @@ export function buildCompetitorRouteId(id: string) {
 }
 
 export function seedCompetitorId(name: string, website: string) {
-  return crypto.createHash("sha1").update(`${name}|${website}`).digest("hex").slice(0, 12);
+  return createDeterministicId(name, website);
 }
 
 export async function readCurrentCompetitorsText() {
@@ -232,4 +244,18 @@ export async function readEventsHistory() {
 
 export async function appendEventHistory(line: string) {
   await fs.appendFile(EVENTS_PATH, `${line}\n`);
+}
+
+export function mergeCompetitorsWithHealth(
+  competitors: CompetitorItem[],
+  healthById: Record<string, {
+    coverage_score?: number;
+    source_status?: CompetitorItem["source_status"];
+    source_last_collected?: CompetitorItem["source_last_collected"];
+  }>
+) {
+  return competitors.map((competitor) => ({
+    ...competitor,
+    ...(healthById[competitor.id] ?? {})
+  }));
 }

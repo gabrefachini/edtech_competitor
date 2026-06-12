@@ -1,0 +1,39 @@
+- name: Aprimora
+  keywords: [aprendizagem, plataforma, avaliaÃ§Ã£o, currÃ­culo, escola]
+  signals: [LMS, analytics, teacher, student]
+
+- name: HUB.Educacional
+  keywords: [hub, integraÃ§Ã£o, ecossistema, gestÃ£o, conteÃºdo]
+  signals: [platform, workflow, integration]
+
+- name: Pense +
+  keywords: [pense, raciocÃ­nio, matemÃ¡tica, gamificaÃ§Ã£o, desempenho]
+  signals: [problem solving, learning outcome]
+
+- name: Robotis
+  keywords: [robotics, robÃ³tica, kit, stem, classroom]
+  signals: [hardware, coding, maker]
+
+- name: Inventura
+  keywords: [inovaÃ§Ã£o, laboratÃ³rio, experimentaÃ§Ã£o, descoberta]
+  signals: [maker, project-based]
+
+- name: LEGO Education
+  keywords: [lego, education, steam, robotics, classroom]
+  signals: [kit, curriculum, hands-on]
+
+- name: micro:bit
+  keywords: [micro:bit, coding, embedded, sensors, maker]
+  signals: [compute, hardware, classroom]
+
+- name: Mesa Educacional
+  keywords: [mesa educacional, gestÃ£o, escola, classroom, digital]
+  signals: [table, interactive]
+
+- name: Learnlab
+  keywords: [learnlab, assessment, learning, pedagogy, data]
+  signals: [research, analytics]
+
+- name: NEDU
+  keywords: [nedu, network, education, school, platform]
+  signals: [community, ecosystem]

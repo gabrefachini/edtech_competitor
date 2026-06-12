@@ -2,26 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
 import { z } from "zod";
-
-const competitorSchema = z.object({
-  name: z.string().min(1),
-  website: z.string().url(),
-  socials: z
-    .object({
-      linkedin: z.string().optional(),
-      instagram: z.string().optional(),
-      youtube: z.string().optional(),
-      x: z.string().optional()
-    })
-    .partial()
-    .optional(),
-  markets: z.array(z.string()).optional(),
-  regions: z.array(z.string()).optional(),
-  scope: z.enum(["competes_market", "benchmark_global"]).optional(),
-  notes: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  products_impacted: z.array(z.string()).optional()
-});
+import { normalizeCompetitorConfigs, readCompetitorFile, type NormalizedCompetitorConfig } from "../lib/competitorConfig";
+import { resolveProjectPath } from "../lib/projectPaths";
 
 const productSchema = z.object({
   name: z.string().min(1),
@@ -29,13 +11,12 @@ const productSchema = z.object({
   signals: z.array(z.string()).default([])
 });
 
-export type Competitor = z.infer<typeof competitorSchema>;
 export type Product = z.infer<typeof productSchema>;
 
 export type EventConfidence = "high" | "med" | "low";
 
 export type EventFacts = {
-  pricing_model?: "contact_sales";
+  pricing_model?: "contact_sales" | "quote_based";
   price_changes?: Array<{
     plan_name?: string;
     old_price?: string | null;
@@ -59,25 +40,30 @@ export type EventFacts = {
   }>;
 };
 
+type ProductFile = Product[] | { products: Product[] } | { name: string; keywords?: string[]; signals?: string[] }[];
 
-export function loadYamlFile<T>(filePath: string): T {
+function loadYamlFile<T>(filePath: string): T {
   const raw = fs.readFileSync(filePath, "utf8");
   return yaml.load(raw) as T;
 }
 
+function normalizeProducts(raw: ProductFile): Product[] {
+  const list = Array.isArray(raw)
+    ? raw
+    : typeof raw === "object" && raw !== null && "products" in raw
+      ? raw.products
+      : [];
+  return z.array(productSchema).parse(list);
+}
+
 export function loadConfig() {
-  const root = process.cwd();
-  const competitorsPath = path.join(root, "config", "competitors.yaml");
-  const productsPath = path.join(root, "config", "products.yaml");
-  const competitorsRaw = loadYamlFile<unknown>(competitorsPath);
-  const productsRaw = loadYamlFile<unknown>(productsPath);
-  const competitorsInput =
-    Array.isArray(competitorsRaw)
-      ? competitorsRaw
-      : typeof competitorsRaw === "object" && competitorsRaw !== null && "competitors" in competitorsRaw
-        ? (competitorsRaw as { competitors: unknown }).competitors
-        : [];
-  const competitors = z.array(competitorSchema).parse(competitorsInput);
-  const products = z.array(productSchema).parse(productsRaw);
+  const competitorsPath = resolveProjectPath("config", "competitors.yaml");
+  const productKbPath = resolveProjectPath("config", "product_kb.yaml");
+  const productsPath = resolveProjectPath("config", "products.yaml");
+  const competitorsRaw = readCompetitorFile(fs.readFileSync(competitorsPath, "utf8"));
+  const productsRaw = fs.existsSync(productKbPath) ? loadYamlFile<ProductFile>(productKbPath) : loadYamlFile<ProductFile>(productsPath);
+
+  const competitors: NormalizedCompetitorConfig[] = normalizeCompetitorConfigs(competitorsRaw.competitors ?? []);
+  const products = normalizeProducts(productsRaw);
   return { competitors, products };
 }

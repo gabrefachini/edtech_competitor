@@ -1,4 +1,4 @@
-import type { EventItem, CompetitorItem } from "./types";
+import type { CompetitorItem, EventItem } from "./types";
 
 type MetricValue = number | string | null;
 
@@ -101,27 +101,30 @@ function summarizeFact(event: EventItem) {
   const facts = event.facts;
   if (facts?.price_changes?.length) {
     const price = facts.price_changes[0];
-    if (price.old_price && price.new_price) return `preço de ${price.old_price} para ${price.new_price}`;
-    if (price.new_price) return `agora ${price.new_price}`;
-    return "agora é contact sales";
+    if (price.old_price && price.new_price) return `price from ${price.old_price} to ${price.new_price}`;
+    if (price.new_price) return `now ${price.new_price}`;
+    return facts.pricing_model === "quote_based" ? "quote-based / price not published" : "contact sales / price not published";
+  }
+  if (facts?.pricing_model) {
+    return facts.pricing_model === "quote_based" ? "quote-based / price not published" : "contact sales / price not published";
   }
   if (facts?.new_partnerships?.length) {
-    return `parceria com ${facts.new_partnerships[0].partner_name}`;
+    return `partnership with ${facts.new_partnerships[0].partner_name}`;
   }
   if (facts?.new_features?.length) {
     const feature = facts.new_features[0];
     return `feature ${feature.feature_name}${feature.description_short ? ` - ${feature.description_short}` : ""}`;
   }
   if (event.type.includes("bid") || event.type.includes("tender") || event.type.includes("rfp")) {
-    return "movimento de bid / edital";
+    return "bid / tender movement";
   }
   return event.summary;
 }
 
 export function formatLinksMarkdown(links: EvidenceLink[]) {
   const unique = dedupeLinks(links).slice(0, 12);
-  if (!unique.length) return "Fontes: —";
-  return `Fontes: ${unique
+  if (!unique.length) return "Sources: -";
+  return `Sources: ${unique
     .map((link) => {
       const label = link.title?.trim() || domainOf(link.url);
       return `[${label}](${link.url})`;
@@ -132,16 +135,17 @@ export function formatLinksMarkdown(links: EvidenceLink[]) {
 export function pickEvidenceLinks(events: EventItem[], maxLinks: number, priorityOrder: string[] = ["website", "release", "blog", "social", "youtube", "news", "bid"]) {
   const scored = events
     .filter((event) => Boolean(event.url))
-    .map((event) => {
+    .flatMap((event) => {
+      const urls = event.evidence_urls?.length ? event.evidence_urls : [event.url];
       const text = `${event.type} ${event.source}`.toLowerCase();
       const priorityMatch = priorityOrder.findIndex((token) => text.includes(token));
       const priority = priorityMatch === -1 ? sourcePriority(event) + priorityOrder.length : priorityMatch;
-      return {
-        url: event.url,
+      return urls.map((url) => ({
+        url,
         title: normalizeEvidenceTitle(event),
         type: event.type,
         score: priority * 100 + sourcePriority(event) * 10
-      };
+      }));
     })
     .sort((a, b) => a.score - b.score);
   return dedupeLinks(scored).slice(0, maxLinks);
@@ -244,11 +248,11 @@ export function computeExecutiveMetrics(events: EventItem[], lastWeekEvents: Eve
 }
 
 export function fmtMetric(value: MetricValue) {
-  return value === null || value === undefined || value === "" ? "—" : String(value);
+  return value === null || value === undefined || value === "" ? "-" : String(value);
 }
 
 export function fmtDelta(value: MetricValue) {
-  if (value === null || value === undefined || value === "") return "—";
+  if (value === null || value === undefined || value === "") return "-";
   const num = Number(value);
   if (Number.isNaN(num)) return String(value);
   return `${num > 0 ? "+" : ""}${num}%`;
@@ -261,38 +265,38 @@ export function buildWeeklyReportMarkdown(events: EventItem[], lastWeekEvents: E
   const privateEvents = events.filter((event) => !publicEvents.includes(event));
 
   const lines: string[] = [];
-  lines.push("# Resumo Semanal");
+  lines.push("# Weekly Summary");
   lines.push("");
-  lines.push("## Resumo Executivo");
-  lines.push(`- Concorrentes monitorados: **${fmtMetric(metrics.competitors_monitored)}**`);
-  lines.push(`- Fontes analisadas: **${fmtMetric(metrics.sources_analyzed_count)}**`);
-  lines.push(`- Eventos 7d: **${fmtMetric(metrics.events_7d_total)}** (${fmtDelta(metrics.delta_vs_last_week)})`);
-  lines.push(`- Mudanças no site 7d: **${fmtMetric(metrics.site_changes_7d)}**`);
-  lines.push(`- Posts sociais 7d: **${fmtMetric(metrics.social_posts_7d)}**`);
-  lines.push(`- Vídeos no YouTube 7d: **${fmtMetric(metrics.youtube_videos_7d)}**`);
-  lines.push(`- Menções em notícias 7d: **${fmtMetric(metrics.news_mentions_7d)}**`);
+  lines.push("## Executive Summary");
+  lines.push(`- Competitors monitored: **${fmtMetric(metrics.competitors_monitored)}**`);
+  lines.push(`- Sources analyzed: **${fmtMetric(metrics.sources_analyzed_count)}**`);
+  lines.push(`- 7d events: **${fmtMetric(metrics.events_7d_total)}** (${fmtDelta(metrics.delta_vs_last_week)})`);
+  lines.push(`- Site changes 7d: **${fmtMetric(metrics.site_changes_7d)}**`);
+  lines.push(`- Social posts 7d: **${fmtMetric(metrics.social_posts_7d)}**`);
+  lines.push(`- YouTube videos 7d: **${fmtMetric(metrics.youtube_videos_7d)}**`);
+  lines.push(`- News mentions 7d: **${fmtMetric(metrics.news_mentions_7d)}**`);
   lines.push(`- Bids 7d: **${fmtMetric(metrics.bids_7d)}**`);
-  lines.push(`- Vencedores detectados: **${fmtMetric(metrics.winners_detected)}**`);
+  lines.push(`- Winners detected: **${fmtMetric(metrics.winners_detected)}**`);
   lines.push("");
-  lines.push("### Distribuição de confiança");
-  lines.push(`- Alta: **${metrics.confidence_distribution.high}**`);
-  lines.push(`- Média: **${metrics.confidence_distribution.medium}**`);
-  lines.push(`- Baixa: **${metrics.confidence_distribution.low}**`);
+  lines.push("### Confidence Distribution");
+  lines.push(`- High: **${metrics.confidence_distribution.high}**`);
+  lines.push(`- Medium: **${metrics.confidence_distribution.medium}**`);
+  lines.push(`- Low: **${metrics.confidence_distribution.low}**`);
   lines.push("");
-  lines.push("## Placar da Semana");
-  lines.push("| KPI | Valor | Delta |");
+  lines.push("## Weekly Scoreboard");
+  lines.push("| KPI | Value | Delta |");
   lines.push("| --- | ---: | ---: |");
-  lines.push(`| Concorrentes monitorados | ${fmtMetric(metrics.competitors_monitored)} | Fontes: ${formatLinksMarkdown(metrics.evidence.byKpi.competitors_monitored)} |`);
-  lines.push(`| Fontes analisadas | ${fmtMetric(metrics.sources_analyzed_count)} | Fontes: ${formatLinksMarkdown(metrics.evidence.byKpi.sources_analyzed_count)} |`);
-  lines.push(`| Eventos 7d total | ${fmtMetric(metrics.events_7d_total)} | ${fmtDelta(metrics.delta_vs_last_week)} / Fontes: ${formatLinksMarkdown(metrics.evidence.byKpi.events_7d_total)} |`);
-  lines.push(`| Mudanças no site 7d | ${fmtMetric(metrics.site_changes_7d)} | Fontes: ${formatLinksMarkdown(metrics.evidence.byKpi.site_changes_7d)} |`);
-  lines.push(`| Posts sociais 7d | ${fmtMetric(metrics.social_posts_7d)} | Fontes: ${formatLinksMarkdown(metrics.evidence.byKpi.social_posts_7d)} |`);
-  lines.push(`| Vídeos no YouTube 7d | ${fmtMetric(metrics.youtube_videos_7d)} | Fontes: ${formatLinksMarkdown(metrics.evidence.byKpi.youtube_videos_7d)} |`);
-  lines.push(`| Menções em notícias 7d | ${fmtMetric(metrics.news_mentions_7d)} | Fontes: ${formatLinksMarkdown(metrics.evidence.byKpi.news_mentions_7d)} |`);
-  lines.push(`| Bids 7d | ${fmtMetric(metrics.bids_7d)} | Fontes: ${formatLinksMarkdown(metrics.evidence.byKpi.bids_7d)} |`);
-  lines.push(`| Vencedores detectados | ${fmtMetric(metrics.winners_detected)} | Fontes: ${formatLinksMarkdown(metrics.evidence.byKpi.winners_detected)} |`);
+  lines.push(`| Competitors monitored | ${fmtMetric(metrics.competitors_monitored)} | Sources: ${formatLinksMarkdown(metrics.evidence.byKpi.competitors_monitored)} |`);
+  lines.push(`| Sources analyzed | ${fmtMetric(metrics.sources_analyzed_count)} | Sources: ${formatLinksMarkdown(metrics.evidence.byKpi.sources_analyzed_count)} |`);
+  lines.push(`| Events 7d total | ${fmtMetric(metrics.events_7d_total)} | ${fmtDelta(metrics.delta_vs_last_week)} / Sources: ${formatLinksMarkdown(metrics.evidence.byKpi.events_7d_total)} |`);
+  lines.push(`| Site changes 7d | ${fmtMetric(metrics.site_changes_7d)} | Sources: ${formatLinksMarkdown(metrics.evidence.byKpi.site_changes_7d)} |`);
+  lines.push(`| Social posts 7d | ${fmtMetric(metrics.social_posts_7d)} | Sources: ${formatLinksMarkdown(metrics.evidence.byKpi.social_posts_7d)} |`);
+  lines.push(`| YouTube videos 7d | ${fmtMetric(metrics.youtube_videos_7d)} | Sources: ${formatLinksMarkdown(metrics.evidence.byKpi.youtube_videos_7d)} |`);
+  lines.push(`| News mentions 7d | ${fmtMetric(metrics.news_mentions_7d)} | Sources: ${formatLinksMarkdown(metrics.evidence.byKpi.news_mentions_7d)} |`);
+  lines.push(`| Bids 7d | ${fmtMetric(metrics.bids_7d)} | Sources: ${formatLinksMarkdown(metrics.evidence.byKpi.bids_7d)} |`);
+  lines.push(`| Winners detected | ${fmtMetric(metrics.winners_detected)} | Sources: ${formatLinksMarkdown(metrics.evidence.byKpi.winners_detected)} |`);
   lines.push("");
-  lines.push("## Top 5 Movimentos");
+  lines.push("## Top 5 Movements");
   metrics.evidence.topMovements.forEach(({ event, evidence }, index) => {
     const links = formatLinksMarkdown(evidence);
     lines.push(`${index + 1}. **${event.competitor}** - ${summarizeFact(event)}`);
@@ -300,32 +304,32 @@ export function buildWeeklyReportMarkdown(events: EventItem[], lastWeekEvents: E
     lines.push(`   - ${links}`);
   });
   lines.push("");
-  lines.push("## Heatmap por Produto");
+  lines.push("## Product Heatmap");
   metrics.evidence.impactByProduct.slice(0, 10).forEach((row, index) => {
     const delta = row.delta ?? 0;
-    lines.push(`${index + 1}. **${row.product}** - ${row.count} eventos (${delta >= 0 ? "+" : ""}${delta})`);
+    lines.push(`${index + 1}. **${row.product}** - ${row.count} events (${delta >= 0 ? "+" : ""}${delta})`);
     lines.push(`   - ${formatLinksMarkdown(row.evidence)}`);
   });
   lines.push("");
-  lines.push("## Público vs Privado");
-  lines.push(`### Público (${publicEvents.length})`);
+  lines.push("## Public vs Private");
+  lines.push(`### Public (${publicEvents.length})`);
   if (publicEvents.length) {
     publicEvents.slice(0, 5).forEach((event) => lines.push(`- ${event.competitor}: ${event.summary}`));
   } else {
-    lines.push("- —");
+    lines.push("- -");
   }
-  lines.push(`### Privado (${privateEvents.length})`);
+  lines.push(`### Private (${privateEvents.length})`);
   if (privateEvents.length) {
     privateEvents.slice(0, 5).forEach((event) => lines.push(`- ${event.competitor}: ${event.summary}`));
   } else {
-    lines.push("- —");
+    lines.push("- -");
   }
   lines.push("");
-  lines.push("## Ações recomendadas");
-  lines.push("- Produto: revisar roadmap nos produtos com maior variação.");
-  lines.push("- Comercial Público: acompanhar sinais de bids, winners e movimentações de edital.");
-  lines.push("- Comercial Privado: priorizar concorrentes com maior atividade e impacto.");
-  lines.push("- Marketing: ajustar mensagem para os temas mais recorrentes da semana.");
-  lines.push("- Operações: manter monitoramento de fontes com baixa confiança para confirmar tendências.");
+  lines.push("## Recommended Actions");
+  lines.push("- Product: review roadmap around the highest-variance products.");
+  lines.push("- Public sales: watch bids, winners and tender activity.");
+  lines.push("- Private sales: prioritize competitors with the most activity.");
+  lines.push("- Marketing: align messaging to the most frequent themes.");
+  lines.push("- Operations: keep low-confidence sources in the queue for confirmation.");
   return lines.join("\n");
 }

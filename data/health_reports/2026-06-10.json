@@ -1,0 +1,1234 @@
+{
+  "date": "2026-06-10",
+  "generated_at": "2026-06-10T21:09:25.743Z",
+  "competitors": [
+    {
+      "id": "arco",
+      "name": "Arco",
+      "coverage_score": 40,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 13,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": [
+        "https://arcoeducacao.com.br",
+        "https://arcoeducacao.com.br/",
+        "https://arcoeducacao.com.br/pricing",
+        "https://arcoeducacao.com.br/price",
+        "https://arcoeducacao.com.br/plans",
+        "https://arcoeducacao.com.br/blog",
+        "https://arcoeducacao.com.br/news",
+        "https://arcoeducacao.com.br/release-notes"
+      ]
+    },
+    {
+      "id": "arduino",
+      "name": "Arduíno",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "astral",
+      "name": "Astral",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "astrocode",
+      "name": "Astrocode",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "big-brain",
+      "name": "Big Brain",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "brinkmobil",
+      "name": "Brinkmobil",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "byjus",
+      "name": "Byjus",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "clever-us",
+      "name": "Clever US",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "cloe",
+      "name": "Cloe",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "colaborativa",
+      "name": "Colaborativa",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "conexia-educacao",
+      "name": "Conexia Educação",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "ctrl-play",
+      "name": "Ctrl+Play",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "eduten",
+      "name": "Eduten",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "eleva",
+      "name": "Eleva",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "foreducation",
+      "name": "ForEducation",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "fuzzy-makers",
+      "name": "Fuzzy makers",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "geekie",
+      "name": "Geekie",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "inicie",
+      "name": "Inicie",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "ixl",
+      "name": "IXL",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "khan-academy",
+      "name": "Khan Academy",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "layers",
+      "name": "Layers",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "liga-escola",
+      "name": "Liga Escola",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "little-maker",
+      "name": "Little Maker",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "manga-high",
+      "name": "Manga High",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "mathema",
+      "name": "Mathema",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "matific",
+      "name": "Matific",
+      "coverage_score": 5,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 1,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": [
+        "https://www.linkedin.com/company/matific"
+      ]
+    },
+    {
+      "id": "max-ia",
+      "name": "Max.Ia",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "mcassab",
+      "name": "Mcassab",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "mesinha-digital",
+      "name": "Mesinha Digital",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "mind-makers",
+      "name": "Mind Makers",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "modelix",
+      "name": "Modelix",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "multiedro",
+      "name": "Multiedro",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "mundo-4d",
+      "name": "Mundo 4d",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "nav-a-vela",
+      "name": "Nav a vela",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "open-robotics",
+      "name": "Open Robotics",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "perseus",
+      "name": "Perseus",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "pete",
+      "name": "Pete",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "plurall-store",
+      "name": "Plurall Store",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "quantum",
+      "name": "Quantum",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "reeducation",
+      "name": "Reeducation",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "robociencia",
+      "name": "Robociencia",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "roboeduc",
+      "name": "Roboeduc",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "robomind",
+      "name": "Robomind",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "sae-digital",
+      "name": "Sae Digital",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "santana",
+      "name": "Santana",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "sm",
+      "name": "SM",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "somos-educacao",
+      "name": "Somos Educação",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "sponte",
+      "name": "Sponte",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "triade-educacional",
+      "name": "Tríade Educacional",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "trivium",
+      "name": "Trivium",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "via-maker",
+      "name": "Via Maker",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "wonde-uk",
+      "name": "Wonde UK",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "youcubed",
+      "name": "Youcubed",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "youtz",
+      "name": "Youtz",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    },
+    {
+      "id": "zoom",
+      "name": "Zoom",
+      "coverage_score": 0,
+      "source_status": {
+        "website": "empty",
+        "news": "empty",
+        "social": "empty",
+        "youtube": "empty"
+      },
+      "source_last_collected": {
+        "website": null,
+        "news": null,
+        "social": null,
+        "youtube": null
+      },
+      "website_pages_collected_7d": 0,
+      "social_events_7d": 0,
+      "news_events_7d": 0,
+      "youtube_events_7d": 0,
+      "evidence_urls": []
+    }
+  ],
+  "summary": {
+    "average_coverage": 1,
+    "ok_sources": 0,
+    "blocked_sources": 0,
+    "empty_sources": 220,
+    "rate_limited_sources": 0
+  }
+}

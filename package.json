@@ -9,6 +9,7 @@
     "start": "next start",
     "digest:run": "tsx src/runWeeklyDigest.ts",
     "digest:weekly": "tsx src/runWeeklyDigest.ts",
+    "health:weekly": "tsx src/runWeeklyHealthReport.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },

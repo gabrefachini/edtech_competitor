@@ -9,18 +9,25 @@ import type { CompetitorItem } from "../../lib/types";
 type CompetitorResponse = {
   competitors: CompetitorItem[];
   total: number;
+  health?: Record<string, unknown>;
 };
 
-const marketLabels: Record<string, string> = { public: "Público", private: "Privado" };
+const marketLabels: Record<string, string> = { public: "Publico", private: "Privado" };
 const scopeLabels: Record<string, string> = {
   competes_market: "Concorrente (mercado)",
   benchmark_global: "Benchmark global"
 };
 
 function formatDateTime(value: string | null) {
-  if (!value) return "—";
+  if (!value) return "-";
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? value : date.toLocaleString("pt-BR");
+}
+
+function coverageTone(value?: number) {
+  if ((value ?? 0) >= 70) return "success";
+  if ((value ?? 0) >= 40) return "warning";
+  return "critical";
 }
 
 export default function CompetitorsClient() {
@@ -63,10 +70,10 @@ export default function CompetitorsClient() {
     setError(null);
     try {
       const res = await fetch(`/api/competitors/${id}/run`, { method: "POST" });
-      if (!res.ok) throw new Error("Não foi possível rodar agora.");
+      if (!res.ok) throw new Error("Nao foi possivel rodar agora.");
       await refreshAfterMutation();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Não foi possível rodar agora.");
+      setError(err instanceof Error ? err.message : "Nao foi possivel rodar agora.");
     } finally {
       setRowLoading((current) => ({ ...current, [id]: { ...(current[id] ?? {}), run: false } }));
     }
@@ -81,10 +88,10 @@ export default function CompetitorsClient() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status })
       });
-      if (!res.ok) throw new Error("Não foi possível atualizar o status.");
+      if (!res.ok) throw new Error("Nao foi possivel atualizar o status.");
       await refreshAfterMutation();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Não foi possível atualizar o status.");
+      setError(err instanceof Error ? err.message : "Nao foi possivel atualizar o status.");
     } finally {
       setRowLoading((current) => ({ ...current, [id]: { ...(current[id] ?? {}), toggle: false } }));
     }
@@ -113,13 +120,13 @@ export default function CompetitorsClient() {
       <TopNav />
       <Shell
         title="Concorrentes"
-        subtitle="Fonte única: YAML persistido com filtros e ações em tempo real"
+        subtitle="Fonte unica: YAML persistido com filtros, cobertura e acoes em tempo real"
         actions={<Button href="/competitors/new">Adicionar concorrente</Button>}
       >
         <Card className="p-5">
           <div className="grid gap-3 md:grid-cols-5">
             <label className="text-sm">
-              <div className="mb-1 text-muted">região</div>
+              <div className="mb-1 text-muted">regiao</div>
               <select value={searchParams.get("region") ?? "all"} onChange={(e) => setFilter("region", e.target.value)} className="focus-ring w-full rounded-2xl border border-outline bg-white px-3 py-2">
                 <option value="all">Todos</option>
                 {filterValues.regions.map((item) => (
@@ -180,10 +187,10 @@ export default function CompetitorsClient() {
 
         <Card className="mt-6 overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="min-w-[1280px] table-fixed text-left text-sm">
+            <table className="min-w-[1460px] table-fixed text-left text-sm">
               <thead className="bg-surface2 text-muted">
                 <tr>
-                  {["name", "website", "scope", "regions", "markets", "last_run", "events_7d", "impacted_products", "actions"].map((col) => (
+                  {["name", "website", "scope", "regions", "markets", "last_run", "events_7d", "coverage", "impacted_products", "actions"].map((col) => (
                     <th key={col} className="px-4 py-3 font-medium capitalize">
                       {col}
                     </th>
@@ -193,7 +200,7 @@ export default function CompetitorsClient() {
               <tbody>
                 {loading ? (
                   <tr>
-                    <td className="px-4 py-4 text-muted" colSpan={9}>
+                    <td className="px-4 py-4 text-muted" colSpan={10}>
                       Carregando...
                     </td>
                   </tr>
@@ -211,14 +218,27 @@ export default function CompetitorsClient() {
                         <td className="px-4 py-4 align-top">{scopeLabels[row.scope] ?? row.scope}</td>
                         <td className="px-4 py-4 align-top">{row.regions.join(", ")}</td>
                         <td className="px-4 py-4 align-top">{row.markets.map((market) => marketLabels[market] ?? market).join(", ")}</td>
-                        <td className="px-4 py-4 align-top">{formatDateTime(row.last_run)}</td>
+                        <td className="px-4 py-4 align-top" title={`website: ${formatDateTime(row.source_last_collected?.website ?? null)}\nnews: ${formatDateTime(row.source_last_collected?.news ?? null)}\nsocial: ${formatDateTime(row.source_last_collected?.social ?? null)}\nyoutube: ${formatDateTime(row.source_last_collected?.youtube ?? null)}`}>
+                          {formatDateTime(row.last_run)}
+                        </td>
                         <td className="px-4 py-4 align-top">{row.events_7d}</td>
-                        <td className="px-4 py-4 align-top">{row.impacted_products.join(", ") || "—"}</td>
+                        <td className="px-4 py-4 align-top">
+                          <Badge tone={coverageTone(row.coverage_score) as "neutral" | "info" | "success" | "warning" | "critical"} title={`coverage_score ${row.coverage_score ?? 0}`}>
+                            {row.coverage_score ?? 0}%
+                          </Badge>
+                        </td>
+                        <td className="px-4 py-4 align-top">{row.impacted_products.join(", ") || "-"}</td>
                         <td className="px-4 py-4 align-top">
                           <div className="flex flex-wrap gap-2">
-                            <Button variant="ghost" href={`/competitors/${row.id}`}>Ver</Button>
-                            <Button variant="secondary" onClick={() => runNow(row.id)} disabled={row.status === "paused" || Boolean(isRunning)}>{isRunning ? "Rodando..." : "Rodar agora"}</Button>
-                            <Button onClick={() => toggleStatus(row.id, row.status === "active" ? "paused" : "active")}>{isToggling ? "Salvando..." : row.status === "active" ? "Pausar" : "Ativar"}</Button>
+                            <Button variant="ghost" href={`/competitors/${row.id}`}>
+                              Ver
+                            </Button>
+                            <Button variant="secondary" onClick={() => runNow(row.id)} disabled={row.status === "paused" || Boolean(isRunning)}>
+                              {isRunning ? "Rodando..." : "Rodar agora"}
+                            </Button>
+                            <Button onClick={() => toggleStatus(row.id, row.status === "active" ? "paused" : "active")}>
+                              {isToggling ? "Salvando..." : row.status === "active" ? "Pausar" : "Ativar"}
+                            </Button>
                           </div>
                         </td>
                       </tr>
@@ -226,7 +246,7 @@ export default function CompetitorsClient() {
                   })
                 ) : (
                   <tr>
-                    <td className="px-4 py-4 text-muted" colSpan={9}>
+                    <td className="px-4 py-4 text-muted" colSpan={10}>
                       Nenhum concorrente encontrado.
                     </td>
                   </tr>

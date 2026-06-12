@@ -1,248 +1,1878 @@
-version: "0.1"
+version: '0.2'
 notes:
-  - "Lista inicial para MVP de monitoramento semanal (site + redes + notícias)."
-  - "scope: competes_market (concorrência no nosso mercado) | benchmark_global (referência global)."
-  - "regions: BR/LATAM/GLOBAL. markets: public/private."
+  - >-
+    Gerado automaticamente a partir das planilhas 'Análise Concorrentes - Educacional.xlsx' (aba 'Competitors and key
+    words').
+  - >-
+    Sugestão: preencher URLs oficiais de redes sociais (linkedin/x/instagram/youtube) quando disponíveis para aumentar a
+    confiança.
+  - 'MVP: coletores social/news/youtube usam queries (search-based) quando não há URL oficial.'
+defaults:
+  website_paths_hint:
+    - /
+    - /pricing
+    - /plans
+    - /product
+    - /products
+    - /solutions
+    - /platform
+    - /blog
+    - /news
+    - /updates
+    - /release-notes
+    - /changelog
+    - /partners
+    - /integrations
+    - /case-studies
+    - /resources
+    - /webinars
+    - /events
+    - /careers
+  social_search_templates:
+    linkedin: site:linkedin.com {name} (launch OR update OR feature OR parceria OR partnership OR pricing OR preço)
+    x: site:x.com {name} (launch OR update OR feature OR partnership OR pricing)
+    instagram: site:instagram.com {name} (lançamento OR novidade OR atualização OR parceria)
+  youtube_search_template: '{name} (product update OR new feature OR lançamento OR webinar OR demo)'
+  news_search_template: '{name} (education OR edtech OR school OR platform OR partnership OR pricing OR launch OR update)'
 competitors:
-  - name: "Clever"
-    website: "https://clever.com/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL"]
-    markets: ["public", "private"]
-    tags: ["SSO", "integration", "app marketplace", "rostering", "analytics"]
-    products_impacted: ["HUB.Educacional"]
+  - id: arco
+    name: Arco
+    website: https://arcoeducacao.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+      - steam
+    status: active
+    products_impacted:
+      - Suítes
+    sources:
+      website:
+        - url: https://arcoeducacao.com.br
+      news:
+        - query: Arco education edtech launch update pricing partnership
+        - query: Arco news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Arco (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Arco announcement feature partnership
+        x:
+          - query: site:x.com Arco (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Arco launch update pricing
+        instagram:
+          - query: site:instagram.com Arco (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Arco lançamento novidade update
+      youtube:
+        - query: Arco (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Arco youtube
+  - id: arduino
+    name: Arduíno
+    website: https://www.arduino.cc/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - coding
+      - hardware
+    status: active
+    products_impacted:
+      - micro:bit
+      - Inventura
+    sources:
+      website:
+        - url: https://www.arduino.cc/
+      news:
+        - query: Arduíno education edtech launch update pricing partnership
+        - query: Arduíno news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Arduíno (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Arduíno announcement feature partnership
+        x:
+          - query: site:x.com Arduíno (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Arduíno launch update pricing
+        instagram:
+          - query: site:instagram.com Arduíno (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Arduíno lançamento novidade update
+      youtube:
+        - query: Arduíno (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Arduíno youtube
+  - id: astral
+    name: Astral
+    website: http://www.astralcientifica.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags: []
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: http://www.astralcientifica.com.br
+      news:
+        - query: Astral education edtech launch update pricing partnership
+        - query: Astral news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Astral (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Astral announcement feature partnership
+        x:
+          - query: site:x.com Astral (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Astral launch update pricing
+        instagram:
+          - query: site:instagram.com Astral (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Astral lançamento novidade update
+      youtube:
+        - query: Astral (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Astral youtube
+  - id: astrocode
+    name: Astrocode
+    website: https://astrocoder.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+      - coding
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://astrocoder.com.br
+      news:
+        - query: Astrocode education edtech launch update pricing partnership
+        - query: Astrocode news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Astrocode (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Astrocode announcement feature partnership
+        x:
+          - query: site:x.com Astrocode (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Astrocode launch update pricing
+        instagram:
+          - query: site:instagram.com Astrocode (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Astrocode lançamento novidade update
+      youtube:
+        - query: Astrocode (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Astrocode youtube
+  - id: big-brain
+    name: Big Brain
+    website: https://edu.bigbrain.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+      - integration
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://edu.bigbrain.com.br/
+      news:
+        - query: Big Brain education edtech launch update pricing partnership
+        - query: Big Brain news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Big Brain (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Big Brain announcement feature partnership
+        x:
+          - query: site:x.com Big Brain (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Big Brain launch update pricing
+        instagram:
+          - query: site:instagram.com Big Brain (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Big Brain lançamento novidade update
+      youtube:
+        - query: Big Brain (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Big Brain youtube
+  - id: brinkmobil
+    name: Brinkmobil
+    website: https://www.brinkmobil.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - sso
+    status: active
+    products_impacted:
+      - ATTO
+    sources:
+      website:
+        - url: https://www.brinkmobil.com.br/
+      news:
+        - query: Brinkmobil education edtech launch update pricing partnership
+        - query: Brinkmobil news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Brinkmobil (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Brinkmobil announcement feature partnership
+        x:
+          - query: site:x.com Brinkmobil (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Brinkmobil launch update pricing
+        instagram:
+          - query: site:instagram.com Brinkmobil (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Brinkmobil lançamento novidade update
+      youtube:
+        - query: Brinkmobil (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Brinkmobil youtube
+  - id: byjus
+    name: Byjus
+    website: https://www.byjusfutureschool.com/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+      - coding
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.byjusfutureschool.com/
+      news:
+        - query: Byjus education edtech launch update pricing partnership
+        - query: Byjus news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Byjus (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Byjus announcement feature partnership
+        x:
+          - query: site:x.com Byjus (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Byjus launch update pricing
+        instagram:
+          - query: site:instagram.com Byjus (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Byjus lançamento novidade update
+      youtube:
+        - query: Byjus (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Byjus youtube
+  - id: clever-us
+    name: Clever US
+    website: https://clever.com/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - sso
+    status: active
+    products_impacted:
+      - HUB.Educacional
+    sources:
+      website:
+        - url: https://clever.com/
+      news:
+        - query: Clever US education edtech launch update pricing partnership
+        - query: Clever US news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Clever US (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Clever US announcement feature partnership
+        x:
+          - query: site:x.com Clever US (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Clever US launch update pricing
+        instagram:
+          - query: site:instagram.com Clever US (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Clever US lançamento novidade update
+      youtube:
+        - query: Clever US (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Clever US youtube
+  - id: cloe
+    name: Cloe
+    website: https://cloeedu.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - sso
+    status: active
+    products_impacted:
+      - Pense +
+      - Suítes
+      - HUB.Educacional
+    sources:
+      website:
+        - url: https://cloeedu.com.br/
+      news:
+        - query: Cloe education edtech launch update pricing partnership
+        - query: Cloe news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Cloe (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Cloe announcement feature partnership
+        x:
+          - query: site:x.com Cloe (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Cloe launch update pricing
+        instagram:
+          - query: site:instagram.com Cloe (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Cloe lançamento novidade update
+      youtube:
+        - query: Cloe (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Cloe youtube
+  - id: colaborativa
+    name: Colaborativa
+    website: https://www.colaborativa.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.colaborativa.com.br
+      news:
+        - query: Colaborativa education edtech launch update pricing partnership
+        - query: Colaborativa news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Colaborativa (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Colaborativa announcement feature partnership
+        x:
+          - query: site:x.com Colaborativa (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Colaborativa launch update pricing
+        instagram:
+          - query: site:instagram.com Colaborativa (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Colaborativa lançamento novidade update
+      youtube:
+        - query: Colaborativa (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Colaborativa youtube
+  - id: conexia-educacao
+    name: Conexia Educação
+    website: https://conexia.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - adaptive_learning
+      - analytics
+      - coding
+      - steam
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://conexia.com.br/
+      news:
+        - query: Conexia Educação education edtech launch update pricing partnership
+        - query: Conexia Educação news launch partnership pricing
+      social:
+        linkedin:
+          - query: >-
+              site:linkedin.com Conexia Educação (launch OR update OR feature OR partnership OR pricing OR preço OR
+              edital)
+          - query: site:linkedin.com/company Conexia Educação announcement feature partnership
+        x:
+          - query: site:x.com Conexia Educação (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Conexia Educação launch update pricing
+        instagram:
+          - query: site:instagram.com Conexia Educação (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Conexia Educação lançamento novidade update
+      youtube:
+        - query: Conexia Educação (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Conexia Educação youtube
+  - id: ctrl-play
+    name: Ctrl+Play
+    website: https://www.ctrlplay.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - coding
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.ctrlplay.com.br/
+      news:
+        - query: Ctrl+Play education edtech launch update pricing partnership
+        - query: Ctrl+Play news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Ctrl+Play (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Ctrl+Play announcement feature partnership
+        x:
+          - query: site:x.com Ctrl+Play (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Ctrl+Play launch update pricing
+        instagram:
+          - query: site:instagram.com Ctrl+Play (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Ctrl+Play lançamento novidade update
+      youtube:
+        - query: Ctrl+Play (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Ctrl+Play youtube
+  - id: eduten
+    name: Eduten
+    website: https://www.eduten.com/pt/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - sso
+    status: active
+    products_impacted:
+      - Aprimora
+    sources:
+      website:
+        - url: https://www.eduten.com/pt/
+      news:
+        - query: Eduten education edtech launch update pricing partnership
+        - query: Eduten news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Eduten (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Eduten announcement feature partnership
+        x:
+          - query: site:x.com Eduten (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Eduten launch update pricing
+        instagram:
+          - query: site:instagram.com Eduten (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Eduten lançamento novidade update
+      youtube:
+        - query: Eduten (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Eduten youtube
+  - id: eleva
+    name: Eleva
+    website: https://elevaplataforma.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://elevaplataforma.com.br
+      news:
+        - query: Eleva education edtech launch update pricing partnership
+        - query: Eleva news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Eleva (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Eleva announcement feature partnership
+        x:
+          - query: site:x.com Eleva (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Eleva launch update pricing
+        instagram:
+          - query: site:instagram.com Eleva (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Eleva lançamento novidade update
+      youtube:
+        - query: Eleva (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Eleva youtube
+  - id: foreducation
+    name: ForEducation
+    website: https://foreducationedtech.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+      - coding
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://foreducationedtech.com.br
+      news:
+        - query: ForEducation education edtech launch update pricing partnership
+        - query: ForEducation news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com ForEducation (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company ForEducation announcement feature partnership
+        x:
+          - query: site:x.com ForEducation (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com ForEducation launch update pricing
+        instagram:
+          - query: site:instagram.com ForEducation (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com ForEducation lançamento novidade update
+      youtube:
+        - query: ForEducation (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: ForEducation youtube
+  - id: fuzzy-makers
+    name: Fuzzy makers
+    website: https://fuzzymakers.com
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://fuzzymakers.com
+      news:
+        - query: Fuzzy makers education edtech launch update pricing partnership
+        - query: Fuzzy makers news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Fuzzy makers (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Fuzzy makers announcement feature partnership
+        x:
+          - query: site:x.com Fuzzy makers (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Fuzzy makers launch update pricing
+        instagram:
+          - query: site:instagram.com Fuzzy makers (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Fuzzy makers lançamento novidade update
+      youtube:
+        - query: Fuzzy makers (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Fuzzy makers youtube
+  - id: geekie
+    name: Geekie
+    website: https://www.geekie.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.geekie.com.br
+      news:
+        - query: Geekie education edtech launch update pricing partnership
+        - query: Geekie news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Geekie (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Geekie announcement feature partnership
+        x:
+          - query: site:x.com Geekie (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Geekie launch update pricing
+        instagram:
+          - query: site:instagram.com Geekie (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Geekie lançamento novidade update
+      youtube:
+        - query: Geekie (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Geekie youtube
+  - id: inicie
+    name: Inicie
+    website: https://incie.digital
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://incie.digital
+      news:
+        - query: Inicie education edtech launch update pricing partnership
+        - query: Inicie news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Inicie (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Inicie announcement feature partnership
+        x:
+          - query: site:x.com Inicie (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Inicie launch update pricing
+        instagram:
+          - query: site:instagram.com Inicie (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Inicie lançamento novidade update
+      youtube:
+        - query: Inicie (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Inicie youtube
+  - id: ixl
+    name: IXL
+    website: https://br.ixl.com/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - adaptive_learning
+      - math
+    status: active
+    products_impacted:
+      - Aprimora
+    sources:
+      website:
+        - url: https://br.ixl.com/
+      news:
+        - query: IXL education edtech launch update pricing partnership
+        - query: IXL news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com IXL (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company IXL announcement feature partnership
+        x:
+          - query: site:x.com IXL (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com IXL launch update pricing
+        instagram:
+          - query: site:instagram.com IXL (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com IXL lançamento novidade update
+      youtube:
+        - query: IXL (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: IXL youtube
+  - id: khan-academy
+    name: Khan Academy
+    website: https://pt.khanacademy.org/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - literacy
+      - math
+      - sso
+    status: active
+    products_impacted:
+      - Aprimora
+    sources:
+      website:
+        - url: https://pt.khanacademy.org/
+      news:
+        - query: Khan Academy education edtech launch update pricing partnership
+        - query: Khan Academy news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com  Khan Academy (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Khan Academy announcement feature partnership
+        x:
+          - query: site:x.com  Khan Academy (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Khan Academy launch update pricing
+        instagram:
+          - query: site:instagram.com  Khan Academy (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Khan Academy lançamento novidade update
+      youtube:
+        - query: Khan Academy (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Khan Academy youtube
+  - id: layers
+    name: Layers
+    website: https://layers.education/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags: []
+    status: active
+    products_impacted:
+      - HUB.Educacional
+    sources:
+      website:
+        - url: https://layers.education/
+      news:
+        - query: Layers education edtech launch update pricing partnership
+        - query: Layers news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Layers (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Layers announcement feature partnership
+        x:
+          - query: site:x.com Layers (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Layers launch update pricing
+        instagram:
+          - query: site:instagram.com Layers (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Layers lançamento novidade update
+      youtube:
+        - query: Layers (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Layers youtube
+  - id: liga-escola
+    name: Liga Escola
+    website: https://www.ligaescola.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.ligaescola.com.br
+      news:
+        - query: Liga Escola education edtech launch update pricing partnership
+        - query: Liga Escola news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Liga Escola (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Liga Escola announcement feature partnership
+        x:
+          - query: site:x.com Liga Escola (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Liga Escola launch update pricing
+        instagram:
+          - query: site:instagram.com Liga Escola (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Liga Escola lançamento novidade update
+      youtube:
+        - query: Liga Escola (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Liga Escola youtube
+  - id: little-maker
+    name: Little Maker
+    website: https://littlemaker.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - maker
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://littlemaker.com.br/
+      news:
+        - query: Little Maker education edtech launch update pricing partnership
+        - query: Little Maker news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Little Maker (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Little Maker announcement feature partnership
+        x:
+          - query: site:x.com Little Maker (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Little Maker launch update pricing
+        instagram:
+          - query: site:instagram.com Little Maker (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Little Maker lançamento novidade update
+      youtube:
+        - query: Little Maker (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Little Maker youtube
+  - id: manga-high
+    name: Manga High
+    website: https://www.mangahigh.com/pt-br/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - gamification
+    status: active
+    products_impacted:
+      - Aprimora
+    sources:
+      website:
+        - url: https://www.mangahigh.com/pt-br/
+      news:
+        - query: Manga High education edtech launch update pricing partnership
+        - query: Manga High news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Manga High (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Manga High announcement feature partnership
+        x:
+          - query: site:x.com Manga High (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Manga High launch update pricing
+        instagram:
+          - query: site:instagram.com Manga High (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Manga High lançamento novidade update
+      youtube:
+        - query: Manga High (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Manga High youtube
+  - id: mathema
+    name: Mathema
+    website: https://mathema.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - math
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://mathema.com.br
+      news:
+        - query: Mathema education edtech launch update pricing partnership
+        - query: Mathema news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Mathema (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Mathema announcement feature partnership
+        x:
+          - query: site:x.com Mathema (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Mathema launch update pricing
+        instagram:
+          - query: site:instagram.com Mathema (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Mathema lançamento novidade update
+      youtube:
+        - query: Mathema (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Mathema youtube
+  - id: matific
+    name: Matific
+    website: https://www.matific.com/pt/pt/home/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - math
+    status: active
+    products_impacted:
+      - Aprimora
+    sources:
+      website:
+        - url: https://www.matific.com/pt/pt/home/
+      news:
+        - query: |-
+            Matific
 
-  - name: "Wonde"
-    website: "https://wonde.com/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL"]
-    markets: ["public", "private"]
-    tags: ["SSO", "integration", "edtech ecosystem", "data sync"]
-    products_impacted: ["HUB.Educacional"]
+             education edtech launch update pricing partnership
+        - query: Matific news launch partnership pricing
+      social:
+        linkedin:
+          - query: |-
+              site:linkedin.com Matific
 
-  - name: "Layers Education"
-    website: "https://layers.education/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL"]
-    markets: ["public", "private"]
-    tags: ["integration", "app management", "education platform"]
-    products_impacted: ["HUB.Educacional"]
+               (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Matific announcement feature partnership
+        x:
+          - query: |-
+              site:x.com Matific
 
-  - name: "Google for Education"
-    website: "https://edu.google.com/"
-    socials: { linkedin: "", youtube: "https://www.youtube.com/@googleforeducation", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL"]
-    markets: ["public", "private"]
-    tags: ["classroom", "workspace", "education ecosystem"]
-    products_impacted: ["HUB.Educacional"]
+               (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Matific launch update pricing
+        instagram:
+          - query: |-
+              site:instagram.com Matific
 
-  - name: "Microsoft Education"
-    website: "https://www.microsoft.com/education"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL"]
-    markets: ["public", "private"]
-    tags: ["teams", "microsoft 365", "education platform"]
-    products_impacted: ["HUB.Educacional"]
+               (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Matific lançamento novidade update
+      youtube:
+        - query: |-
+            Matific
 
-  - name: "Matific"
-    website: "https://www.matific.com/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL"]
-    markets: ["public", "private"]
-    tags: ["math practice", "gamification", "adaptive learning"]
-    products_impacted: ["Aprimora"]
-
-  - name: "Khan Academy"
-    website: "https://www.khanacademy.org/"
-    socials: { linkedin: "", youtube: "https://www.youtube.com/@khanacademy", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL"]
-    markets: ["public", "private"]
-    tags: ["practice", "videos", "personalized learning"]
-    products_impacted: ["Aprimora"]
-
-  - name: "Educacross"
-    website: "https://educacross.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["public", "private"]
-    tags: ["gamification", "literacy", "math", "K12"]
-    products_impacted: ["Aprimora"]
-
-  - name: "Nave à Vela"
-    website: "https://naveavela.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["private", "public"]
-    tags: ["maker", "STEAM", "curriculum", "platform"]
-    products_impacted: ["Pense +", "Inventura", "Robotis"]
-
-  - name: "Little Maker"
-    website: "https://littlemaker.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["private", "public"]
-    tags: ["maker lab", "micro:bit", "books", "training", "platform"]
-    products_impacted: ["Pense +", "Inventura", "Robotis", "micro:bit"]
-
-  - name: "Orange Maker"
-    website: "https://orangemaker.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["private", "public"]
-    tags: ["maker", "arduino", "training", "platform", "books"]
-    products_impacted: ["Inventura", "Pense +", "Robotis"]
-
-  - name: "ZOOM Education"
-    website: "https://zoom.education/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["private", "public"]
-    tags: ["maker", "STEAM", "facilitator", "platform", "events"]
-    products_impacted: ["Robotis", "Inventura", "Pense +"]
-
-  - name: "Robomind"
-    website: "https://robomind.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["private", "public"]
-    tags: ["maker", "STEAM", "platform", "books", "micro:bit"]
-    products_impacted: ["Robotis", "Inventura", "Pense +", "micro:bit"]
-
-  - name: "Viamaker"
-    website: "https://viamaker.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["private", "public"]
-    tags: ["LEGO Education reseller", "robotics kits", "content"]
-    products_impacted: ["LEGO Education", "Robotis"]
-
-  - name: "Santana (LEGO Education Revenda)"
-    website: "https://santana.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["private", "public"]
-    tags: ["LEGO Education reseller", "robotics kits"]
-    products_impacted: ["LEGO Education"]
-
-  - name: "PlayTable"
-    website: "https://playtable.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["private", "public"]
-    tags: ["interactive table", "early learning", "games", "multidisciplinary"]
-    products_impacted: ["Mesa Educacional"]
-
-  - name: "Educ Play"
-    website: "https://educplay.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["private", "public"]
-    tags: ["interactive table", "assistive tech", "therapy", "inclusion"]
-    products_impacted: ["Mesa Educacional"]
-
-  - name: "Quinyx Company (Mesinha Digital)"
-    website: "https://quinyxcompany.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["private", "public"]
-    tags: ["interactive table", "touchscreen", "apps", "BNCC"]
-    products_impacted: ["Mesa Educacional"]
-
-  - name: "Olimpíada Brasileira de Robótica (OBR)"
-    website: "https://obr.org.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["public", "private"]
-    tags: ["robotics competition", "STEM", "events"]
-    products_impacted: ["Robotis", "LEGO Education"]
-
-  - name: "World Robot Olympiad (WRO)"
-    website: "https://wro-association.org/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL"]
-    markets: ["public", "private"]
-    tags: ["robotics competition", "STEM", "events"]
-    products_impacted: ["Robotis", "LEGO Education"]
-
-  - name: "Torneio Brasil de Robótica (TBR)"
-    website: "https://torneiobrasilderobotica.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["public", "private"]
-    tags: ["robotics tournament", "events", "schools"]
-    products_impacted: ["Robotis", "LEGO Education"]
-
-  - name: "FIRA"
-    website: "https://firaworldcup.org/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL"]
-    markets: ["public", "private"]
-    tags: ["robotics competition", "STEM", "events"]
-    products_impacted: ["Robotis", "LEGO Education"]
-
-  - name: "Arduino"
-    website: "https://www.arduino.cc/"
-    socials: { linkedin: "", youtube: "https://www.youtube.com/@Arduino", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL", "LATAM"]
-    markets: ["public", "private"]
-    tags: ["microcontroller", "maker", "education", "open source"]
-    products_impacted: ["micro:bit", "Inventura"]
-
-  - name: "Raspberry Pi"
-    website: "https://www.raspberrypi.com/"
-    socials: { linkedin: "", youtube: "https://www.youtube.com/@RaspberryPi", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL", "LATAM"]
-    markets: ["public", "private"]
-    tags: ["single-board computer", "education", "programming", "robotics"]
-    products_impacted: ["micro:bit", "Inventura"]
-
-  - name: "Makey Makey"
-    website: "https://makeymakey.com/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL"]
-    markets: ["public", "private"]
-    tags: ["creative coding", "physical computing", "maker"]
-    products_impacted: ["micro:bit", "Inventura"]
-
-  - name: "NEDU"
-    website: "https://ia.nedu.com.br/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "competes_market"
-    regions: ["BR"]
-    markets: ["public", "private"]
-    tags: ["education BI", "analytics", "conversational AI", "ERP integration"]
-    products_impacted: ["NEDU", "HUB.Educacional"]
-
-  - name: "Learnlab"
-    website: "https://learnlab.net/"
-    socials: { linkedin: "", youtube: "", instagram: "", x: "" }
-    scope: "benchmark_global"
-    regions: ["GLOBAL"]
-    markets: ["public", "private"]
-    tags: ["toolbox", "learning analytics", "AI feedback", "Microsoft/Google integration"]
-    products_impacted: ["Learnlab", "HUB.Educacional"]
+             (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Matific youtube
+  - id: max-ia
+    name: Max.Ia
+    website: https://maxia.education/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags: []
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://maxia.education/
+      news:
+        - query: Max.Ia education edtech launch update pricing partnership
+        - query: Max.Ia news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Max.Ia (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Max.Ia announcement feature partnership
+        x:
+          - query: site:x.com Max.Ia (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Max.Ia launch update pricing
+        instagram:
+          - query: site:instagram.com Max.Ia (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Max.Ia lançamento novidade update
+      youtube:
+        - query: Max.Ia (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Max.Ia youtube
+  - id: mcassab
+    name: Mcassab
+    website: https://www.mcassab.com.br/lego/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags: []
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.mcassab.com.br/lego/
+      news:
+        - query: Mcassab education edtech launch update pricing partnership
+        - query: Mcassab news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Mcassab (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Mcassab announcement feature partnership
+        x:
+          - query: site:x.com Mcassab (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Mcassab launch update pricing
+        instagram:
+          - query: site:instagram.com Mcassab (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Mcassab lançamento novidade update
+      youtube:
+        - query: Mcassab (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Mcassab youtube
+  - id: mesinha-digital
+    name: Mesinha Digital
+    website: https://mesinhadigital.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags: []
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://mesinhadigital.com.br/
+      news:
+        - query: Mesinha Digital education edtech launch update pricing partnership
+        - query: Mesinha Digital news launch partnership pricing
+      social:
+        linkedin:
+          - query: >-
+              site:linkedin.com Mesinha Digital (launch OR update OR feature OR partnership OR pricing OR preço OR
+              edital)
+          - query: site:linkedin.com/company Mesinha Digital announcement feature partnership
+        x:
+          - query: site:x.com Mesinha Digital (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Mesinha Digital launch update pricing
+        instagram:
+          - query: site:instagram.com Mesinha Digital (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Mesinha Digital lançamento novidade update
+      youtube:
+        - query: Mesinha Digital (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Mesinha Digital youtube
+  - id: mind-makers
+    name: Mind Makers
+    website: https://mindmakers.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - maker
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://mindmakers.com.br
+      news:
+        - query: Mind Makers education edtech launch update pricing partnership
+        - query: Mind Makers news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Mind Makers (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Mind Makers announcement feature partnership
+        x:
+          - query: site:x.com Mind Makers (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Mind Makers launch update pricing
+        instagram:
+          - query: site:instagram.com Mind Makers (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Mind Makers lançamento novidade update
+      youtube:
+        - query: Mind Makers (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Mind Makers youtube
+  - id: modelix
+    name: Modelix
+    website: https://www.modelix.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - hardware
+      - robotics
+      - sso
+    status: active
+    products_impacted:
+      - ATTO
+      - Lego
+    sources:
+      website:
+        - url: https://www.modelix.com.br/
+      news:
+        - query: Modelix education edtech launch update pricing partnership
+        - query: Modelix news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Modelix (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Modelix announcement feature partnership
+        x:
+          - query: site:x.com Modelix (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Modelix launch update pricing
+        instagram:
+          - query: site:instagram.com Modelix (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Modelix lançamento novidade update
+      youtube:
+        - query: Modelix (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Modelix youtube
+  - id: multiedro
+    name: Multiedro
+    website: https://www.multiedro.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags: []
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.multiedro.com.br/
+      news:
+        - query: Multiedro education edtech launch update pricing partnership
+        - query: Multiedro news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Multiedro (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Multiedro announcement feature partnership
+        x:
+          - query: site:x.com Multiedro (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Multiedro launch update pricing
+        instagram:
+          - query: site:instagram.com Multiedro (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Multiedro lançamento novidade update
+      youtube:
+        - query: Multiedro (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Multiedro youtube
+  - id: mundo-4d
+    name: Mundo 4d
+    website: https://www.mundo4d.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+      - math
+      - sso
+      - steam
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.mundo4d.com.br
+      news:
+        - query: Mundo 4d education edtech launch update pricing partnership
+        - query: Mundo 4d news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Mundo 4d (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Mundo 4d announcement feature partnership
+        x:
+          - query: site:x.com Mundo 4d (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Mundo 4d launch update pricing
+        instagram:
+          - query: site:instagram.com Mundo 4d (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Mundo 4d lançamento novidade update
+      youtube:
+        - query: Mundo 4d (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Mundo 4d youtube
+  - id: nav-a-vela
+    name: Nav a vela
+    website: https://naveavela.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - maker
+    status: active
+    products_impacted:
+      - Pense+ Lego
+    sources:
+      website:
+        - url: https://naveavela.com.br
+      news:
+        - query: Nav a vela education edtech launch update pricing partnership
+        - query: Nav a vela news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Nav a vela (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Nav a vela announcement feature partnership
+        x:
+          - query: site:x.com Nav a vela (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Nav a vela launch update pricing
+        instagram:
+          - query: site:instagram.com Nav a vela (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Nav a vela lançamento novidade update
+      youtube:
+        - query: Nav a vela (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Nav a vela youtube
+  - id: open-robotics
+    name: Open Robotics
+    website: https://www.openrobotics.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - maker
+      - robotics
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.openrobotics.com.br
+      news:
+        - query: Open Robotics education edtech launch update pricing partnership
+        - query: Open Robotics news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Open Robotics (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Open Robotics announcement feature partnership
+        x:
+          - query: site:x.com Open Robotics (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Open Robotics launch update pricing
+        instagram:
+          - query: site:instagram.com Open Robotics (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Open Robotics lançamento novidade update
+      youtube:
+        - query: Open Robotics (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Open Robotics youtube
+  - id: perseus
+    name: Perseus
+    website: https://www.perseus.com.br/Institucional/Sobre
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.perseus.com.br/Institucional/Sobre
+      news:
+        - query: Perseus education edtech launch update pricing partnership
+        - query: Perseus news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Perseus (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Perseus announcement feature partnership
+        x:
+          - query: site:x.com Perseus (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Perseus launch update pricing
+        instagram:
+          - query: site:instagram.com Perseus (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Perseus lançamento novidade update
+      youtube:
+        - query: Perseus (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Perseus youtube
+  - id: pete
+    name: Pete
+    website: https://www.pete.com.br/site/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - hardware
+      - robotics
+    status: active
+    products_impacted:
+      - ATTO
+      - Lego
+    sources:
+      website:
+        - url: https://www.pete.com.br/site/
+      news:
+        - query: Pete education edtech launch update pricing partnership
+        - query: Pete news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Pete (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Pete announcement feature partnership
+        x:
+          - query: site:x.com Pete (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Pete launch update pricing
+        instagram:
+          - query: site:instagram.com Pete (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Pete lançamento novidade update
+      youtube:
+        - query: Pete (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Pete youtube
+  - id: plurall-store
+    name: Plurall Store
+    website: https://www.plurall.net
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - sso
+      - steam
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.plurall.net
+      news:
+        - query: Plurall Store education edtech launch update pricing partnership
+        - query: Plurall Store news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Plurall Store (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Plurall Store announcement feature partnership
+        x:
+          - query: site:x.com Plurall Store (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Plurall Store launch update pricing
+        instagram:
+          - query: site:instagram.com Plurall Store (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Plurall Store lançamento novidade update
+      youtube:
+        - query: Plurall Store (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Plurall Store youtube
+  - id: quantum
+    name: Quantum
+    website: https://quantumeduc.com/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - robotics
+      - steam
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://quantumeduc.com/
+      news:
+        - query: "Quantum\_ education edtech launch update pricing partnership"
+        - query: Quantum news launch partnership pricing
+      social:
+        linkedin:
+          - query: "site:linkedin.com Quantum\_ (launch OR update OR feature OR partnership OR pricing OR preço OR edital)"
+          - query: site:linkedin.com/company Quantum announcement feature partnership
+        x:
+          - query: "site:x.com Quantum\_ (launch OR update OR feature OR partnership OR pricing)"
+          - query: site:x.com Quantum launch update pricing
+        instagram:
+          - query: "site:instagram.com Quantum\_ (lançamento OR novidade OR atualização OR parceria)"
+          - query: site:instagram.com Quantum lançamento novidade update
+      youtube:
+        - query: "Quantum\_ (product update OR new feature OR lançamento OR webinar OR demo)"
+        - query: Quantum youtube
+  - id: reeducation
+    name: Reeducation
+    website: https://reeducation.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://reeducation.com.br
+      news:
+        - query: Reeducation education edtech launch update pricing partnership
+        - query: Reeducation news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Reeducation (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Reeducation announcement feature partnership
+        x:
+          - query: site:x.com Reeducation (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Reeducation launch update pricing
+        instagram:
+          - query: site:instagram.com Reeducation (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Reeducation lançamento novidade update
+      youtube:
+        - query: Reeducation (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Reeducation youtube
+  - id: robociencia
+    name: Robociencia
+    website: https://robociencia.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - robotics
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://robociencia.com.br
+      news:
+        - query: Robociencia education edtech launch update pricing partnership
+        - query: Robociencia news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Robociencia (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Robociencia announcement feature partnership
+        x:
+          - query: site:x.com Robociencia (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Robociencia launch update pricing
+        instagram:
+          - query: site:instagram.com Robociencia (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Robociencia lançamento novidade update
+      youtube:
+        - query: Robociencia (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Robociencia youtube
+  - id: roboeduc
+    name: Roboeduc
+    website: https://www.roboeduc.com
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - coding
+      - robotics
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.roboeduc.com
+      news:
+        - query: Roboeduc education edtech launch update pricing partnership
+        - query: Roboeduc news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Roboeduc (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Roboeduc announcement feature partnership
+        x:
+          - query: site:x.com Roboeduc (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Roboeduc launch update pricing
+        instagram:
+          - query: site:instagram.com Roboeduc (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Roboeduc lançamento novidade update
+      youtube:
+        - query: Roboeduc (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Roboeduc youtube
+  - id: robomind
+    name: Robomind
+    website: https://www.robomind.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - robotics
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.robomind.com.br/
+      news:
+        - query: Robomind education edtech launch update pricing partnership
+        - query: Robomind news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Robomind (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Robomind announcement feature partnership
+        x:
+          - query: site:x.com Robomind (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Robomind launch update pricing
+        instagram:
+          - query: site:instagram.com Robomind (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Robomind lançamento novidade update
+      youtube:
+        - query: Robomind (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Robomind youtube
+  - id: sae-digital
+    name: Sae Digital
+    website: https://www.sae.digital/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - assessment
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.sae.digital/
+      news:
+        - query: Sae Digital education edtech launch update pricing partnership
+        - query: Sae Digital news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Sae Digital (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Sae Digital announcement feature partnership
+        x:
+          - query: site:x.com Sae Digital (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Sae Digital launch update pricing
+        instagram:
+          - query: site:instagram.com Sae Digital (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Sae Digital lançamento novidade update
+      youtube:
+        - query: Sae Digital (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Sae Digital youtube
+  - id: santana
+    name: Santana
+    website: https://santanaimport.com.br/lego-meu-mundo-extra-grande.htm
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags: []
+    status: active
+    products_impacted:
+      - Lego
+    sources:
+      website:
+        - url: https://santanaimport.com.br/lego-meu-mundo-extra-grande.htm
+      news:
+        - query: Santana education edtech launch update pricing partnership
+        - query: Santana news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Santana (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Santana announcement feature partnership
+        x:
+          - query: site:x.com Santana (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Santana launch update pricing
+        instagram:
+          - query: site:instagram.com Santana (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Santana lançamento novidade update
+      youtube:
+        - query: Santana (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Santana youtube
+  - id: sm
+    name: SM
+    website: https://www.smeducacao.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.smeducacao.com.br/
+      news:
+        - query: SM education edtech launch update pricing partnership
+        - query: SM news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com SM (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company SM announcement feature partnership
+        x:
+          - query: site:x.com SM (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com SM launch update pricing
+        instagram:
+          - query: site:instagram.com SM (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com SM lançamento novidade update
+      youtube:
+        - query: SM (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: SM youtube
+  - id: somos-educacao
+    name: Somos Educação
+    website: https://www.somoseducacao.com.br/
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - steam
+    status: active
+    products_impacted:
+      - Suítes
+    sources:
+      website:
+        - url: https://www.somoseducacao.com.br/
+      news:
+        - query: Somos Educação education edtech launch update pricing partnership
+        - query: Somos Educação news launch partnership pricing
+      social:
+        linkedin:
+          - query: >-
+              site:linkedin.com Somos Educação (launch OR update OR feature OR partnership OR pricing OR preço OR
+              edital)
+          - query: site:linkedin.com/company Somos Educação announcement feature partnership
+        x:
+          - query: site:x.com Somos Educação (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Somos Educação launch update pricing
+        instagram:
+          - query: site:instagram.com Somos Educação (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Somos Educação lançamento novidade update
+      youtube:
+        - query: Somos Educação (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Somos Educação youtube
+  - id: sponte
+    name: Sponte
+    website: https://www.sponte.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - assessment
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.sponte.com.br
+      news:
+        - query: Sponte education edtech launch update pricing partnership
+        - query: Sponte news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Sponte (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Sponte announcement feature partnership
+        x:
+          - query: site:x.com Sponte (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Sponte launch update pricing
+        instagram:
+          - query: site:instagram.com Sponte (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Sponte lançamento novidade update
+      youtube:
+        - query: Sponte (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Sponte youtube
+  - id: triade-educacional
+    name: Tríade Educacional
+    website: https://www.triade.me
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.triade.me
+      news:
+        - query: Tríade Educacional education edtech launch update pricing partnership
+        - query: Tríade Educacional news launch partnership pricing
+      social:
+        linkedin:
+          - query: >-
+              site:linkedin.com Tríade Educacional (launch OR update OR feature OR partnership OR pricing OR preço OR
+              edital)
+          - query: site:linkedin.com/company Tríade Educacional announcement feature partnership
+        x:
+          - query: site:x.com Tríade Educacional (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Tríade Educacional launch update pricing
+        instagram:
+          - query: site:instagram.com Tríade Educacional (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Tríade Educacional lançamento novidade update
+      youtube:
+        - query: Tríade Educacional (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Tríade Educacional youtube
+  - id: trivium
+    name: Trivium
+    website: https://www.trivium.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - coding
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.trivium.com.br
+      news:
+        - query: Trivium education edtech launch update pricing partnership
+        - query: Trivium news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Trivium (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Trivium announcement feature partnership
+        x:
+          - query: site:x.com Trivium (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Trivium launch update pricing
+        instagram:
+          - query: site:instagram.com Trivium (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Trivium lançamento novidade update
+      youtube:
+        - query: Trivium (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Trivium youtube
+  - id: via-maker
+    name: Via Maker
+    website: https://www.viamaker.com/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+      - coding
+      - maker
+      - math
+      - robotics
+      - sso
+      - steam
+    status: active
+    products_impacted:
+      - Lego
+    sources:
+      website:
+        - url: https://www.viamaker.com/
+      news:
+        - query: Via Maker education edtech launch update pricing partnership
+        - query: Via Maker news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Via Maker (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Via Maker announcement feature partnership
+        x:
+          - query: site:x.com Via Maker (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Via Maker launch update pricing
+        instagram:
+          - query: site:instagram.com Via Maker (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Via Maker lançamento novidade update
+      youtube:
+        - query: Via Maker (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Via Maker youtube
+  - id: wonde-uk
+    name: Wonde UK
+    website: https://www.wonde.com/
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - analytics
+    status: active
+    products_impacted:
+      - HUB.Educacional
+    sources:
+      website:
+        - url: https://www.wonde.com/
+      news:
+        - query: Wonde UK education edtech launch update pricing partnership
+        - query: Wonde UK news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Wonde UK (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Wonde UK announcement feature partnership
+        x:
+          - query: site:x.com Wonde UK (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Wonde UK launch update pricing
+        instagram:
+          - query: site:instagram.com Wonde UK (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Wonde UK lançamento novidade update
+      youtube:
+        - query: Wonde UK (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Wonde UK youtube
+  - id: youcubed
+    name: Youcubed
+    website: https://www.youcubed.org
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - math
+      - sso
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.youcubed.org
+      news:
+        - query: Youcubed education edtech launch update pricing partnership
+        - query: Youcubed news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Youcubed (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Youcubed announcement feature partnership
+        x:
+          - query: site:x.com Youcubed (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Youcubed launch update pricing
+        instagram:
+          - query: site:instagram.com Youcubed (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Youcubed lançamento novidade update
+      youtube:
+        - query: Youcubed (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Youcubed youtube
+  - id: youtz
+    name: Youtz
+    website: https://www.youtz.com.br
+    scope: competes_market
+    regions:
+      - BR
+    markets:
+      - public
+      - private
+    tags:
+      - coding
+      - math
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://www.youtz.com.br
+      news:
+        - query: Youtz education edtech launch update pricing partnership
+        - query: Youtz news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Youtz (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Youtz announcement feature partnership
+        x:
+          - query: site:x.com Youtz (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Youtz launch update pricing
+        instagram:
+          - query: site:instagram.com Youtz (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Youtz lançamento novidade update
+      youtube:
+        - query: Youtz (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Youtz youtube
+  - id: zoom
+    name: Zoom
+    website: https://zoom.education
+    scope: benchmark_global
+    regions:
+      - GLOBAL
+    markets:
+      - public
+      - private
+    tags:
+      - coding
+      - math
+      - robotics
+      - sso
+      - steam
+    status: active
+    products_impacted: []
+    sources:
+      website:
+        - url: https://zoom.education
+      news:
+        - query: Zoom education edtech launch update pricing partnership
+        - query: Zoom news launch partnership pricing
+      social:
+        linkedin:
+          - query: site:linkedin.com Zoom (launch OR update OR feature OR partnership OR pricing OR preço OR edital)
+          - query: site:linkedin.com/company Zoom announcement feature partnership
+        x:
+          - query: site:x.com Zoom (launch OR update OR feature OR partnership OR pricing)
+          - query: site:x.com Zoom launch update pricing
+        instagram:
+          - query: site:instagram.com Zoom (lançamento OR novidade OR atualização OR parceria)
+          - query: site:instagram.com Zoom lançamento novidade update
+      youtube:
+        - query: Zoom (product update OR new feature OR lançamento OR webinar OR demo)
+        - query: Zoom youtube

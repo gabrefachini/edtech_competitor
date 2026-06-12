@@ -1,6 +1,6 @@
 import * as cheerio from "cheerio";
-import { hashContent } from "./detectChanges.js";
-import type { EventFacts } from "./loadConfig.js";
+import { hashContent } from "./detectChanges";
+import type { EventFacts } from "./loadConfig";
 
 export type PageSnapshot = {
   url: string;

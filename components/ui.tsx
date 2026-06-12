@@ -44,7 +44,15 @@ export function Button({ children, variant = "primary", href, onClick, disabled 
   );
 }
 
-export function Badge({ children, tone = "neutral" }: { children: ReactNode; tone?: "neutral" | "info" | "success" | "warning" | "critical" }) {
+export function Badge({
+  children,
+  tone = "neutral",
+  title
+}: {
+  children: ReactNode;
+  tone?: "neutral" | "info" | "success" | "warning" | "critical";
+  title?: string;
+}) {
   const tones = {
     neutral: "bg-surface2 text-text ring-1 ring-inset ring-outline/60",
     info: "bg-[#d1e4ff] text-info ring-1 ring-inset ring-[#b8d4f2]",
@@ -52,5 +60,9 @@ export function Badge({ children, tone = "neutral" }: { children: ReactNode; ton
     warning: "bg-[#fff2cc] text-[#664c00] ring-1 ring-inset ring-[#f0df9f]",
     critical: "bg-[#ffdad5] text-critical ring-1 ring-inset ring-[#efb8b3]"
   };
-  return <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${tones[tone]}`}>{children}</span>;
+   return (
+    <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${tones[tone]}`} title={title}>
+      {children}
+    </span>
+  );
 }
